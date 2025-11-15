@@ -1,3 +1,4 @@
+import TransactionList from '@components/TransactionList';
 import '@styles/App.css';
 import '@styles/form.scss';
 import { useEffect, useState } from 'react';
@@ -9,29 +10,29 @@ interface Transaction {
 };
 
 function App() {
-  const [data, setData] = useState<Transaction[]>([]);
+  // const [data, setData] = useState<Transaction[]>([]);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+  //   const form = e.currentTarget;
+  //   const formData = new FormData(form);
 
-    const transactionType = formData.get('type') as 'income' | 'expense';
-    const amount = formData.get('amount') as string;
+  //   const transactionType = formData.get('type') as 'income' | 'expense';
+  //   const amount = formData.get('amount') as string;
 
-    setData(prev => [...prev, {
-      type: transactionType,
-      amount: parseFloat(amount),
-      createdAt: new Date().toISOString(),
-    }])
+  //   setData(prev => [...prev, {
+  //     type: transactionType,
+  //     amount: parseFloat(amount),
+  //     createdAt: new Date().toISOString(),
+  //   }])
 
-    form.reset();
-  }
+  //   form.reset();
+  // }
 
   return (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      {/* <form className="form" onSubmit={handleSubmit}>
         <fieldset className="form__fieldset form__fieldset--type">
           <label className="form__label" htmlFor="form__type-income">
             <input className="form__input" type="radio" id="form__type-income" name="type" value={"income"} required />
@@ -49,7 +50,8 @@ function App() {
 
         <button className="form__button" type='button'>Cancel</button>
         <button className="form__button" type="submit">Add Transaction</button>
-      </form>
+      </form> */}
+      <TransactionList />
     </>
   )
 }
