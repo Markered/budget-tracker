@@ -1,5 +1,5 @@
 import type { Entry } from "src/types";
-import '@styles/taskEntry.scss';
+import '@styles/TransactionEntry.scss';
 import DeleteIcon from '@assets/icons/delete-icon.svg';
 import EditIcon from '@assets/icons/edit-icon.svg'
 

@@ -1,5 +1,6 @@
 import type { Entry } from "src/types";
 import TransactionEntry from "./TransactionEntry";
+import '@styles/TransactionList.scss'
 
 export default function TransactionList() {
     const testData: Entry[] = [
@@ -45,12 +46,34 @@ export default function TransactionList() {
             amount: 5000,
             date: '2025-11-12T14:15:00Z',
         },
+        {
+            type: 'income',
+            title: 'Test',
+            category: null,
+            amount: 5000,
+            date: '2025-11-12T13:15:00Z',
+        },
     ];
+
+    const formattedData = testData.reduce<Record<string, Entry[]>>((acc, tx) => {
+        const date = tx.date.split('T')[0];
+        if (!acc[date]) acc[date] = [];
+        acc[date].push(tx);
+        return acc;
+    }, {});
 
     return (
         <section className="TransactionList">
-            {testData.map((entry, index) => (
-                <TransactionEntry key={index} {...entry}/>
+            {Object.keys(formattedData).map((date, index) => (
+                <div key={index}>
+                    <time className="TransactionList__date" dateTime={date}>{new Date(date).toLocaleDateString('en-PH', {
+                        month: 'long',
+                        day: 'numeric'
+                    })}</time>
+                    {formattedData[date].map((entry, i) => (
+                        <TransactionEntry key={i} {...entry} />
+                    ))}
+                </div>
             ))}
         </section>
     )
