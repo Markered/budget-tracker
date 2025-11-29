@@ -1,4 +1,4 @@
-import TransactionList from '@components/TransactionList';
+import TransactionList from '@components/TransactionList/TransactionList';
 import '@styles/App.css';
 import '@styles/form.scss';
 import { useEffect, useState } from 'react';

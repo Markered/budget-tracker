@@ -1,8 +1,13 @@
 import type { Entry } from "src/types";
-import TransactionEntry from "./TransactionEntry";
 import '@styles/TransactionList.scss'
+import { Suspense } from "react";
+import React from "react";
+import TransactionEntrySkeleton from "../skeleton/TransactionEntrySkeleton";
+import TransactionListDate from "./TransactionListDate";
 
 export default function TransactionList() {
+    const TransactionEntry = React.lazy(() => import("./TransactionEntry"));
+
     const testData: Entry[] = [
         {
             type: 'income',
@@ -66,16 +71,14 @@ export default function TransactionList() {
         <section className="TransactionList">
             {Object.keys(formattedData).map((date, index) => (
                 <div key={index}>
-                    <time className="TransactionList__date" dateTime={date}>{new Date(date).toLocaleDateString('en-PH', {
-                        month: 'long',
-                        day: 'numeric'
-                    })}</time>
+                    <TransactionListDate date={date}/>
                     {formattedData[date].map((entry, i) => (
-                        <TransactionEntry key={i} {...entry} />
+                        <Suspense fallback={<TransactionEntrySkeleton />}>
+                            <TransactionEntry key={i} {...entry} />
+                        </Suspense>
                     ))}
                 </div>
             ))}
         </section>
     )
 }
-

@@ -10,7 +10,6 @@ export default function TransactionEntry({ type, title, category, amount, date }
             currency: "PHP"
         }).format(amount);
         return type === 'income' ? formattedAmount : `-${formattedAmount}`;
-
     }
 
     return (
